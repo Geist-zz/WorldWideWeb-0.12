@@ -36,7 +36,7 @@ INSTALLFLAGS = -c -s -m 755
 
 -include Makefile.preamble
 
-include $(MAKEFILEDIR)/app.make
+include $(MAKEFILEDIR)/Makefile.common
 
 -include Makefile.postamble
 
