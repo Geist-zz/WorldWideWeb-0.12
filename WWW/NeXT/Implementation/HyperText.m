@@ -627,7 +627,7 @@ static void apply(HTStyle * style, NXRun * r)
 	    r->rFlags.underline = YES;
 	}
     }
-    r->rFlags.dummy = (r->info != 0);		/* Keep track for typingRun */
+    r->rFlags.subclassWantsRTF = (r->info != 0);		/* Keep track for typingRun */
     
     if (style->textRGBColor>=0)
     	r->backColor = style->textRGBColor;
@@ -1468,7 +1468,7 @@ void loadPlainText()
 		s->paraStyle = typingPara;	/* Repair damage to runs */
 		/* What about freeing the old paragraph style? @@ */
 		s->info = (s-1)->info;
-		s->rFlags.dummy = 1;	/* Pass on flag */
+		s->rFlags.subclassWantsRTF = 1;	/* Pass on flag */
 	    }
 	    
 	}
@@ -1512,7 +1512,7 @@ void loadPlainText()
 	run = *s;		/* save a copy */
     }
     
-    if (!run.rFlags.dummy) return [super keyDown:theEvent]; // OK!
+    if (!run.rFlags.subclassWantsRTF) return [super keyDown:theEvent]; // OK!
 
     {
 	id result;
@@ -1561,7 +1561,7 @@ void loadPlainText()
 			    s->info, run.info);
 	            s->info = run.info;
 		    s->paraStyle = run.paraStyle;	/* free old one? */
-		    s->rFlags.dummy = 1;
+		    s->rFlags.subclassWantsRTF = 1;
 		}
 	    } /* if inserted>0 */
 
