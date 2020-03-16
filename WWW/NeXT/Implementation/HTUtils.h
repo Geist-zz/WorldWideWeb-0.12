@@ -30,7 +30,7 @@ extern int WWW_TraceFlag;
 #ifndef VMS
 #ifndef ultrix
 #ifdef NeXT
-#include <libc.h>	/* NeXT */
+//#include <libc.h>	/* NeXT */
 #endif
 #include <stdlib.h>	/* ANSI */
 #else
