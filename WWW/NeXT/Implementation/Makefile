@@ -28,8 +28,8 @@ DEBUG_LIBS = $(LIBS)
 PROF_LIBS = -lNeXT_p -lsys_p
 
 MAKEFILEDIR = /usr/lib/nib
-ICONSECTIONS =	-sectcreate __ICON app icon2.tiff \
-		-sectcreate __ICON html icon1.tiff
+ICONSECTIONS =	-segcreate __ICON app icon2.tiff \
+		-segcreate __ICON html icon1.tiff
 
 INSTALLDIR = $(HOME)/Apps
 INSTALLFLAGS = -c -s -m 755
