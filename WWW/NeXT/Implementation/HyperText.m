@@ -147,7 +147,7 @@ static float page_width()
 	}
 	printf("%5i: %3i of fnt=%i p=%i gy=%3.2f RGB=%i i=%i fl=%x\n",
 	    pos, r->chars, (int)r->font, r->paraStyle,
-	    r->textColor,r->textRGBColor, (int)(r->info),
+	    r->textColor,r->backColor, (int)(r->info),
 	    *(int*)&(r->rFlags));
 
     }
@@ -630,7 +630,7 @@ static void apply(HTStyle * style, NXRun * r)
     r->rFlags.dummy = (r->info != 0);		/* Keep track for typingRun */
     
     if (style->textRGBColor>=0)
-    	r->textRGBColor = style->textRGBColor;
+    	r->backColor = style->textRGBColor;
 }
 
 
@@ -642,7 +642,7 @@ static BOOL willChange(HTStyle * style, NXRun *r)
     if (r->font != style->font) return YES;
 
     if (style->textRGBColor>=0)
-    	if (r->textRGBColor != style->textRGBColor) return YES;
+    	if (r->backColor != style->textRGBColor) return YES;
 
     if (style->textGray>=0)
     	if (r->textColor != style->textGray) return YES;
@@ -769,7 +769,7 @@ BOOL run_match(NXRun* r1, NXRun *r2)
     return 	(r1->font == r2->font)
     	&&	(r1->paraStyle == r2->paraStyle)
     	&&	(r1->textColor == r2->textColor)
-    	&&	(r1->textRGBColor == r2->textRGBColor)
+    	&&	(r1->backColor == r2->backColor)
 	&&	(r1->superscript == r2->superscript)
 	&&	(r1->subscript == r2->subscript)
 	&&	(r1->info == r2->info)
