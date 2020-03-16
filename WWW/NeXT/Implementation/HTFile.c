@@ -173,7 +173,7 @@ PUBLIC BOOL HTEditable(filename)
     if (stat(filename, &fileStatus))		/* Get details of filename */
     	return NO;				/* Can't even access file! */
 
-    ngroups = getgroups(NGROUPS, groups);	/* Groups to which I belong  */
+    ngroups = getgroups(NGROUPS, groups, NULL);	/* Groups to which I belong  */
     myUid = geteuid();				/* Get my user identifier */
 
     if (TRACE) {
