@@ -147,7 +147,7 @@ static float page_width()
 	}
 	printf("%5i: %3i of fnt=%i p=%i gy=%3.2f RGB=%i i=%i fl=%x\n",
 	    pos, r->chars, (int)r->font, r->paraStyle,
-	    r->textGray,r->textRGBColor, (int)(r->info),
+	    r->textColor,r->textRGBColor, (int)(r->info),
 	    *(int*)&(r->rFlags));
 
     }
@@ -617,13 +617,13 @@ static void apply(HTStyle * style, NXRun * r)
     
     
     if (style->textGray>=0)
-    	r->textGray = style->textGray;
+    	r->textColor = style->textGray;
 	
     r->rFlags.underline = NO;
     if (r->info) {
-//    	r->textGray = 0.166666666;		/* Slightly grey - horrid */
+//    	r->textColor = 0.166666666;		/* Slightly grey - horrid */
         if ([(Anchor *)(r->info) destination]) {
-//	    r->textGray = NX_DKGRAY;	/* Anchor highlighting */
+//	    r->textColor = NX_DKGRAY;	/* Anchor highlighting */
 	    r->rFlags.underline = YES;
 	}
     }
@@ -645,7 +645,7 @@ static BOOL willChange(HTStyle * style, NXRun *r)
     	if (r->textRGBColor != style->textRGBColor) return YES;
 
     if (style->textGray>=0)
-    	if (r->textGray != style->textGray) return YES;
+    	if (r->textColor != style->textGray) return YES;
 
     if (style->paragraph) {
         if (r->paraStyle != style->paragraph) return YES;
@@ -686,7 +686,7 @@ static BOOL willChange(HTStyle * style, NXRun *r)
     for (sor=0; sor<textLength; r++) {
         if (r->info == (void *)anchor) 
 	    r->info = 0;
-	    r->textGray =  NX_BLACK;
+	    r->textColor =  NX_BLACK;
         sor = sor+r->chars;
     }
     [window display];
@@ -768,7 +768,7 @@ BOOL run_match(NXRun* r1, NXRun *r2)
 {
     return 	(r1->font == r2->font)
     	&&	(r1->paraStyle == r2->paraStyle)
-    	&&	(r1->textGray == r2->textGray)
+    	&&	(r1->textColor == r2->textColor)
     	&&	(r1->textRGBColor == r2->textRGBColor)
 	&&	(r1->superscript == r2->superscript)
 	&&	(r1->subscript == r2->subscript)
